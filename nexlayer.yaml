@@ -1,0 +1,26 @@
+application:
+  name: phpservermon
+  pods:
+  - name: app
+    image: phpservermon/phpservermon:latest
+    path: /
+    servicePorts:
+    - 80
+    vars:
+      PSM_DB_HOST: "mysql.pod"
+      PSM_DB_NAME: phpservermon
+      PSM_DB_USER: phpservermon
+      PSM_DB_PASS: phpservermon
+  - name: mysql
+    image: mysql:8.0
+    servicePorts:
+    - 3306
+    vars:
+      MYSQL_DATABASE: phpservermon
+      MYSQL_USER: phpservermon
+      MYSQL_PASSWORD: phpservermon
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+    - name: psm-db
+      mountPath: /var/lib/mysql
+      size: 5Gi
