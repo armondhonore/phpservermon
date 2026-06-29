@@ -18,8 +18,8 @@ application:
     vars:
       MYSQL_DATABASE: phpservermon
       MYSQL_USER: phpservermon
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_PASSWORD: phpservermon
+      MYSQL_ROOT_PASSWORD: rootpassword
     volumes:
     - name: psm-db
       mountPath: /var/lib/mysql
