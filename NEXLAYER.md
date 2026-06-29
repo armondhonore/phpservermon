@@ -15,19 +15,20 @@
 
 ## Project Summary
 <!-- nexlayer:section agent-managed=project_summary -->
-PHP Server Monitor is a monitoring tool designed to track and analyze the health and performance of PHP-based server environments.
+phpservermon is a PHP-based server monitoring tool designed to track server health and status metrics.
 <!-- nexlayer:end -->
 
 ## Technology Stack
 <!-- nexlayer:section agent-managed=tech_stack -->
 | Name | Kind | Version | Detected From |
 |------|------|---------|---------------|
-| PHP | language | latest | Dockerfile |
+| PHP | language | unknown | Dockerfile |
+| Apache/Nginx | infra | unknown | Dockerfile |
 <!-- nexlayer:end -->
 
 ## Repository Structure
 <!-- nexlayer:section agent-managed=structure_map -->
-- root/ — Project root containing Docker configuration and deployment manifests
+- Dockerfile — Container definition for the PHP application
 <!-- nexlayer:end -->
 
 ## External Services Required
@@ -55,6 +56,7 @@ _No external services detected._
 | Pod | Variable | Value | Kind |
 |-----|----------|-------|------|
 | `app` | `PSM_DB_HOST` | `"mysql.pod"` | plain |
+| `app` | `PSM_DB_PORT` | `"3306"` | plain |
 | `app` | `PSM_DB_NAME` | `phpservermon` | plain |
 | `app` | `PSM_DB_USER` | `phpservermon` | plain |
 | `app` | `PSM_DB_PASS` | _(set via Nexlayer dashboard)_ | secret |
@@ -84,6 +86,7 @@ application:
     - 80
     vars:
       PSM_DB_HOST: "mysql.pod"
+      PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
       PSM_DB_PASS: phpservermon
@@ -125,7 +128,7 @@ application:
 
 ## Nexlayer Configuration
 <!-- nexlayer:section agent-managed=nexlayer_config -->
-**Last deployed:** 2026-06-29T20:51:17Z  
+**Last deployed:** 2026-06-29T20:58:24Z  
 **Live URL:** https://relaxed-weasel-phpservermon.cloud.nexlayer.ai  
 **Runtime:**  · **Port:** auto-detected  
 **Deploy branch:** nexlayer  
@@ -141,6 +144,7 @@ application:
     - 80
     vars:
       PSM_DB_HOST: "mysql.pod"
+      PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
       PSM_DB_PASS: phpservermon
@@ -164,7 +168,8 @@ application:
 <!-- nexlayer:section agent-managed=build_history -->
 | Date | Status | Notes |
 |------|--------|-------|
-| 2026-06-29T20:49:56Z | analyzed | initial repo analysis |
-| 2026-06-29T20:51:17Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
+| 2026-06-29T20:57:40Z | analyzed | initial repo analysis |
+| 2026-06-29T20:58:24Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
 <!-- nexlayer:end -->
+
 
