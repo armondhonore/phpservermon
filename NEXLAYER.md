@@ -15,7 +15,7 @@
 
 ## Project Summary
 <!-- nexlayer:section agent-managed=project_summary -->
-phpServerMon is a monitoring tool designed to track the status and performance of PHP servers and their associated environments.
+PHP Server Monitor is a monitoring tool designed to track and analyze the health and performance of PHP-based server environments.
 <!-- nexlayer:end -->
 
 ## Technology Stack
@@ -23,12 +23,11 @@ phpServerMon is a monitoring tool designed to track the status and performance o
 | Name | Kind | Version | Detected From |
 |------|------|---------|---------------|
 | PHP | language | latest | Dockerfile |
-| Apache/Nginx | infra | latest | Dockerfile |
 <!-- nexlayer:end -->
 
 ## Repository Structure
 <!-- nexlayer:section agent-managed=structure_map -->
-- Dockerfile — Container definition using phpservermon image
+- root/ — Project root containing Docker configuration and deployment manifests
 <!-- nexlayer:end -->
 
 ## External Services Required
@@ -102,7 +101,6 @@ application:
       mountPath: /var/lib/mysql
       size: 5Gi
 ```
-
 <!-- nexlayer:end -->
 
 ## Nexlayer Deployment Plan
@@ -127,7 +125,7 @@ application:
 
 ## Nexlayer Configuration
 <!-- nexlayer:section agent-managed=nexlayer_config -->
-**Last deployed:** 2026-06-29T20:43:13Z  
+**Last deployed:** 2026-06-29T20:51:17Z  
 **Live URL:** https://relaxed-weasel-phpservermon.cloud.nexlayer.ai  
 **Runtime:**  · **Port:** auto-detected  
 **Deploy branch:** nexlayer  
@@ -166,6 +164,7 @@ application:
 <!-- nexlayer:section agent-managed=build_history -->
 | Date | Status | Notes |
 |------|--------|-------|
-| 2026-06-29T20:42:15Z | analyzed | initial repo analysis |
-| 2026-06-29T20:43:13Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
+| 2026-06-29T20:49:56Z | analyzed | initial repo analysis |
+| 2026-06-29T20:51:17Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
 <!-- nexlayer:end -->
+
