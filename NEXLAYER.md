@@ -15,7 +15,7 @@
 
 ## Project Summary
 <!-- nexlayer:section agent-managed=project_summary -->
-phpservermon is a PHP-based server monitoring tool designed to track and monitor server health and status, utilizing the Symfony 3.4 framework.
+phpservermon is a PHP-based server monitoring tool designed to track server health and performance metrics using the Symfony framework.
 <!-- nexlayer:end -->
 
 ## Technology Stack
@@ -25,23 +25,22 @@ phpservermon is a PHP-based server monitoring tool designed to track and monitor
 | PHP | language | 7.4 | Dockerfile |
 | Apache | infra | 2.4 | Dockerfile |
 | Symfony | framework | 3.4 | Dockerfile |
-| MySQL | database | latest | Dockerfile |
-| Composer | tool | latest | Dockerfile |
+| MySQL | database | Not specified | Dockerfile |
+| Composer | tool | Latest | Dockerfile |
 <!-- nexlayer:end -->
 
 ## Repository Structure
 <!-- nexlayer:section agent-managed=structure_map -->
-- Dockerfile — Container definition using PHP 7.4 Apache
-- docker-entrypoint.sh — Configuration generator and process manager
-- nexlayer.yaml — Nexlayer platform deployment configuration
 - /var/www/html — Application root (installed via composer create-project)
+- docker-entrypoint.sh — Config generation and bootstrap script
+- Dockerfile — Container definition for PHP 7.4 + Apache
 <!-- nexlayer:end -->
 
 ## External Services Required
 <!-- nexlayer:section agent-managed=external_deps -->
 Services that must be configured separately (not deployed by Nexlayer):
 
-- MySQL Database
+- MySQL Database (Required for data persistence)
 <!-- nexlayer:end -->
 
 ## Local Development Setup
@@ -88,7 +87,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: mirror.gcr.io/library/phpservermon-app:latest
+    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f15397a0e"
     path: /
     servicePorts:
     - 80
@@ -136,7 +135,7 @@ application:
 
 ## Nexlayer Configuration
 <!-- nexlayer:section agent-managed=nexlayer_config -->
-**Last deployed:** 2026-06-29T21:07:44Z  
+**Last deployed:** 2026-06-29T21:13:22Z  
 **Live URL:** https://relaxed-weasel-phpservermon.cloud.nexlayer.ai  
 **Runtime:**  · **Port:** auto-detected  
 **Deploy branch:** nexlayer  
@@ -146,7 +145,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: mirror.gcr.io/library/phpservermon-app:latest
+    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f15397a0e"
     path: /
     servicePorts:
     - 80
@@ -176,9 +175,10 @@ application:
 <!-- nexlayer:section agent-managed=build_history -->
 | Date | Status | Notes |
 |------|--------|-------|
-| 2026-06-29T21:06:17Z | analyzed | initial repo analysis |
-| 2026-06-29T21:07:44Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
+| 2026-06-29T21:12:15Z | analyzed | initial repo analysis |
+| 2026-06-29T21:13:22Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
 <!-- nexlayer:end -->
+
 
 
 
