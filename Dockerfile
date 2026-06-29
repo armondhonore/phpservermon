@@ -1,8 +1,7 @@
 FROM mirror.gcr.io/library/php:7.4-apache
 
 # phpservermon 3.5.x targets symfony ~3.4 (PHP 7.x). PHP 7.4 is the last release that
-# runs that dependency tree cleanly — on PHP 8.x composer create-project fails (exit 2)
-# resolving symfony 3.4. System deps + the PHP extensions phpservermon needs.
+# runs that dependency tree cleanly — on PHP 8.x composer create-project fails (exit 2).
 RUN apt-get update && apt-get install -y --no-install-recommends \
         zip unzip git libicu-dev libpng-dev libjpeg-dev libfreetype6-dev libxml2-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -11,9 +10,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install phpservermon into a clean temp dir, then move it into the Apache docroot.
-# (composer create-project will not populate a non-empty docroot, and a bare
-#  COPY . /var/www/html only copies repo metadata — both left the docroot empty,
-#  producing Apache 403 on / and 404 on index.php.)
 RUN composer create-project phpservermon/phpservermon /opt/psm "3.5.*" \
         --no-interaction --no-dev --prefer-dist --ignore-platform-reqs \
     && rm -rf /var/www/html \
