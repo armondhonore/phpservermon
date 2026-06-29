@@ -1,1 +1,0 @@
-FROM phpservermon/phpservermon:latest
