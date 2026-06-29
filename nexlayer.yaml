@@ -2,7 +2,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: docker.io/phpservermon/phpservermon:latest
+    image: phpservermon-app:latest
     path: /
     servicePorts:
     - 80
