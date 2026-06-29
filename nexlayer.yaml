@@ -2,24 +2,25 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: mirror.gcr.io/library/phpservermon-app:latest
+    image: phpservermon-app:latest
     path: /
     servicePorts:
     - 80
     vars:
       PSM_DB_HOST: "mysql.pod"
+      PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
       PSM_DB_PASS: phpservermon
   - name: mysql
-    image: mirror.gcr.io/library/mysql:8.0
+    image: mysql:8.0
     servicePorts:
     - 3306
     vars:
       MYSQL_DATABASE: phpservermon
       MYSQL_USER: phpservermon
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_PASSWORD: phpservermon
+      MYSQL_ROOT_PASSWORD: rootpassword
     volumes:
     - name: psm-db
       mountPath: /var/lib/mysql
