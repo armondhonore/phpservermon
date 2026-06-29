@@ -55,7 +55,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: phpservermon-app:latest
+    image: "# filled by pipeline"
     path: /
     servicePorts:
     - 80
