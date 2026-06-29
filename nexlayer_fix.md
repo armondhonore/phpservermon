@@ -64,7 +64,7 @@ application:
       PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
-      PSM_DB_PASS: phpservermon
+      PSM_DB_PASS: "${MYSQL_PASSWORD}"
   - name: mysql
     image: mysql:8.0
     servicePorts:
@@ -72,10 +72,11 @@ application:
     vars:
       MYSQL_DATABASE: phpservermon
       MYSQL_USER: phpservermon
-      MYSQL_PASSWORD: phpservermon
-      MYSQL_ROOT_PASSWORD: rootpassword
-    volumes:
-    - name: psm-db
-      mountPath: /var/lib/mysql
-      size: 5Gi
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
 ```
+
+Note: the mysql pod intentionally has NO volume. The pipeline regenerates
+`${MYSQL_PASSWORD}` on each deploy; MySQL only applies `MYSQL_PASSWORD` when it
+initialises an EMPTY data dir. A persistent PVC would keep the old password and
+desync against the freshly-generated one. Test data — ephemeral DB is fine.
