@@ -2,7 +2,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: "# filled by pipeline"
+    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f153e85eb"
     path: /
     servicePorts:
     - 80
@@ -13,7 +13,7 @@ application:
       PSM_DB_USER: phpservermon
       PSM_DB_PASS: "${MYSQL_PASSWORD}"
   - name: mysql
-    image: mysql:8.0
+    image: mirror.gcr.io/library/mysql:8.0
     servicePorts:
     - 3306
     vars:

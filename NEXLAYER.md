@@ -15,7 +15,7 @@
 
 ## Project Summary
 <!-- nexlayer:section agent-managed=project_summary -->
-phpservermon is a PHP-based server monitoring tool designed to track server health and performance metrics using the Symfony framework.
+phpservermon is a server monitoring tool developed with PHP and Symfony 3.4, designed to track server health and performance metrics.
 <!-- nexlayer:end -->
 
 ## Technology Stack
@@ -25,22 +25,22 @@ phpservermon is a PHP-based server monitoring tool designed to track server heal
 | PHP | language | 7.4 | Dockerfile |
 | Apache | infra | 2.4 | Dockerfile |
 | Symfony | framework | 3.4 | Dockerfile |
-| MySQL | database | Not specified | Dockerfile |
-| Composer | tool | Latest | Dockerfile |
+| MySQL | database | latest | Dockerfile |
+| Composer | tool | latest | Dockerfile |
 <!-- nexlayer:end -->
 
 ## Repository Structure
 <!-- nexlayer:section agent-managed=structure_map -->
-- /var/www/html — Application root (installed via composer create-project)
-- docker-entrypoint.sh — Config generation and bootstrap script
-- Dockerfile — Container definition for PHP 7.4 + Apache
+- /var/www/html — Symfony application root (installed via composer)
+- docker-entrypoint.sh — Configuration generation and boot script
+- Dockerfile — Multi-extension PHP 7.4 environment setup
 <!-- nexlayer:end -->
 
 ## External Services Required
 <!-- nexlayer:section agent-managed=external_deps -->
 Services that must be configured separately (not deployed by Nexlayer):
 
-- MySQL Database (Required for data persistence)
+- MySQL Database
 <!-- nexlayer:end -->
 
 ## Local Development Setup
@@ -66,19 +66,11 @@ Services that must be configured separately (not deployed by Nexlayer):
 | `app` | `PSM_DB_PORT` | `"3306"` | plain |
 | `app` | `PSM_DB_NAME` | `phpservermon` | plain |
 | `app` | `PSM_DB_USER` | `phpservermon` | plain |
-| `app` | `PSM_DB_PASS` | _(set via Nexlayer dashboard)_ | secret |
+| `app` | `PSM_DB_PASS` | `"${MYSQL_PASSWORD}"` | inter-pod |
 | `mysql` | `MYSQL_DATABASE` | `phpservermon` | plain |
 | `mysql` | `MYSQL_USER` | `phpservermon` | plain |
 | `mysql` | `MYSQL_PASSWORD` | `"${MYSQL_PASSWORD}"` | inter-pod |
 | `mysql` | `MYSQL_ROOT_PASSWORD` | `"${MYSQL_ROOT_PASSWORD}"` | inter-pod |
-| `psm-db` | `mountPath` | `/var/lib/mysql` | plain |
-| `psm-db` | `size` | `5Gi` | plain |
-
-### Secrets Required
-
-Set these in the Nexlayer dashboard before deploying:
-
-- `PSM_DB_PASS` (`app` pod)
 
 ### nexlayer.yaml
 
@@ -87,7 +79,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f15397a0e"
+    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f153e85eb"
     path: /
     servicePorts:
     - 80
@@ -96,7 +88,7 @@ application:
       PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
-      PSM_DB_PASS: phpservermon
+      PSM_DB_PASS: "${MYSQL_PASSWORD}"
   - name: mysql
     image: mirror.gcr.io/library/mysql:8.0
     servicePorts:
@@ -106,10 +98,6 @@ application:
       MYSQL_USER: phpservermon
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-    volumes:
-    - name: psm-db
-      mountPath: /var/lib/mysql
-      size: 5Gi
 ```
 <!-- nexlayer:end -->
 
@@ -135,7 +123,7 @@ application:
 
 ## Nexlayer Configuration
 <!-- nexlayer:section agent-managed=nexlayer_config -->
-**Last deployed:** 2026-06-29T21:13:22Z  
+**Last deployed:** 2026-06-29T21:18:50Z  
 **Live URL:** https://relaxed-weasel-phpservermon.cloud.nexlayer.ai  
 **Runtime:**  · **Port:** auto-detected  
 **Deploy branch:** nexlayer  
@@ -145,7 +133,7 @@ application:
   name: phpservermon
   pods:
   - name: app
-    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f15397a0e"
+    image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/phpservermon:19f153e85eb"
     path: /
     servicePorts:
     - 80
@@ -154,7 +142,7 @@ application:
       PSM_DB_PORT: "3306"
       PSM_DB_NAME: phpservermon
       PSM_DB_USER: phpservermon
-      PSM_DB_PASS: phpservermon
+      PSM_DB_PASS: "${MYSQL_PASSWORD}"
   - name: mysql
     image: mirror.gcr.io/library/mysql:8.0
     servicePorts:
@@ -164,10 +152,6 @@ application:
       MYSQL_USER: phpservermon
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
       MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-    volumes:
-    - name: psm-db
-      mountPath: /var/lib/mysql
-      size: 5Gi
 ```
 <!-- nexlayer:end -->
 
@@ -175,9 +159,10 @@ application:
 <!-- nexlayer:section agent-managed=build_history -->
 | Date | Status | Notes |
 |------|--------|-------|
-| 2026-06-29T21:12:15Z | analyzed | initial repo analysis |
-| 2026-06-29T21:13:22Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
+| 2026-06-29T21:17:46Z | analyzed | initial repo analysis |
+| 2026-06-29T21:18:50Z | success | deployed https://relaxed-weasel-phpservermon.cloud.nexlayer.ai |
 <!-- nexlayer:end -->
+
 
 
 
